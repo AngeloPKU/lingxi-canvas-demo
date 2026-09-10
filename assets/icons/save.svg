@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>保存</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M1.5 2V14C1.5 14.2761 1.72386 14.5 2 14.5H14C14.2761 14.5 14.5 14.2761 14.5 14V5.40719C14.5 5.27458 14.4473 5.1474 14.3536 5.05364L10.9464 1.64645C10.8527 1.55268 10.7255 1.5 10.5929 1.5H2C1.72386 1.5 1.5 1.72386 1.5 2Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_2" d="M5.5 5.5H8.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_3" d="M5.5 14.5L5.5 10C5.5 9.72386 5.72386 9.5 6 9.5H10C10.2761 9.5 10.5 9.72386 10.5 10V14.5" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

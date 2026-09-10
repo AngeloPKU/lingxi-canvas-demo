@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" km_stroke-width="1" km_darkmode="true" kd_rtl="mirror" requiredCustomFeatures="data-kd-color-scheme,data-kd-rtl-mirror-scheme"><desc>撤销16_Undo_UndoQat_上一步_恢复</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M2.5 2.52246V6.10206C2.5 6.10934 2.5059 6.11523 2.51317 6.11523H6.09277" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_2" d="M2.92578 5.68784L5.9162 2.69742C7.59427 1.01935 10.2945 0.955099 12.0505 2.55145C13.9287 4.25896 13.9985 7.18986 12.2035 8.98478L6.51855 14.6698" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

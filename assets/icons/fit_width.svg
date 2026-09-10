@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>适合宽度16_Pdf_PageFitWidth_v2</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-blue-primary {
+       fill: var(--kd-color-icon-blue-primary, #2661BF);
+       stroke: var(--kd-color-icon-blue-primary, #2661BF);
+       km_fill: #2661BF;
+       km_stroke: #2661BF;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M13.5 9V2C13.5 1.72386 13.2761 1.5 13 1.5H3C2.72386 1.5 2.5 1.72386 2.5 2V9" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-1" class="kd-color-icon-blue-primary kd-stroke-width-icon-regular"><path id="line_2" d="M13 12.5H3M4.5 10.5L2.50707 12.4928C2.50317 12.4967 2.50317 12.503 2.50707 12.5069L4.5 14.5M11.5 10.5L13.4929 12.4929C13.4968 12.4968 13.4968 12.5032 13.4929 12.5071L11.5 14.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

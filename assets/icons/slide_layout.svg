@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" km_stroke-width="1" km_darkmode="true" kd_rtl="mirror" requiredCustomFeatures="data-kd-color-scheme,data-kd-rtl-mirror-scheme"><desc>幻灯片版式</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M9 8.5H4C3.72386 8.5 3.5 8.72386 3.5 9V11C3.5 11.2761 3.72386 11.5 4 11.5H9C9.27614 11.5 9.5 11.2761 9.5 11V9C9.5 8.72386 9.27614 8.5 9 8.5Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_2" d="M12 3.5H4C3.72386 3.5 3.5 3.72386 3.5 4V6C3.5 6.27614 3.72386 6.5 4 6.5H12C12.2761 6.5 12.5 6.27614 12.5 6V4C12.5 3.72386 12.2761 3.5 12 3.5Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_3" d="M14 1.5H2C1.72386 1.5 1.5 1.72386 1.5 2V13C1.5 13.2761 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.2761 14.5 13V2C14.5 1.72386 14.2761 1.5 14 1.5Z" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

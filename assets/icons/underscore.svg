@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>下划线16_Underline_Pdf_Underline_v2_Pdf_Underline</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-stroke-width-icon-bold { 
+       stroke-width: var(--kd-stroke-width-icon-bold, 1.2px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M3.5 13.5H12.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-bold"><path id="line_2" d="M4.40039 2.5V7.80019C4.40039 9.78831 6.01208 11.4 8.0002 11.4V11.4C9.98831 11.4 11.6 9.78831 11.6 7.80019V2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>油漆桶16_底纹颜色_TableShadingColor_填充_填充色</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-quaternary {
+       fill: var(--kd-color-icon-quaternary, #E6E6E6);
+       stroke: var(--kd-color-icon-quaternary, #E6E6E6);
+       km_fill: #E6E6E6;
+       km_stroke: #E6E6E6;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-2" class="kd-color-icon-quaternary kd-stroke-width-icon-regular"><path id="fill" d="M11.5 5H3.5L2.85355 5.64645C2.65829 5.84171 2.65829 6.15829 2.85355 6.35355L6.14645 9.64645C6.34171 9.84171 6.65829 9.84171 6.85355 9.64645L11.5 5Z" stroke="none"/></g><g id="group-1" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="fill_2" d="M13.5 8.48463C13.5 7.92668 13.3431 7.09848 12.5048 6C11.6664 7.09848 11.5 7.92668 11.5 8.48463C11.5 9.32155 11.8102 10 12.5048 10C13.1993 10 13.5 9.32155 13.5 8.48463Z" stroke="none"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M2.5 2.5H8" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_2" d="M6 2.5L7.64645 0.853553C7.84171 0.658291 8.15829 0.658291 8.35355 0.853553L11.6464 4.14645C11.8417 4.34171 11.8417 4.65829 11.6464 4.85355L6.85355 9.64645C6.65829 9.84171 6.34171 9.84171 6.14645 9.64645L2.85355 6.35355C2.65829 6.15829 2.65829 5.84171 2.85355 5.64645L4.5 4" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

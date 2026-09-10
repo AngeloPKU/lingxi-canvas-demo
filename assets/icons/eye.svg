@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>眼睛16_护眼模式_iShow_显示_公开_show</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M1 7.99612C3.69231 1.53464 12.3077 1.53461 14.9998 7.99614" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_2" d="M1 7.99612C3.69231 14.4577 12.3077 14.4577 15 7.99613" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_3" d="M10.1534 7.99616C10.1534 9.18569 9.18909 10.15 7.99955 10.15C6.81001 10.15 5.8457 9.18569 5.8457 7.99616C5.8457 6.80663 6.81001 5.84232 7.99955 5.84232C9.18909 5.84232 10.1534 6.80663 10.1534 7.99616Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

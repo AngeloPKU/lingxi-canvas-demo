@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>升序16_上箭头_小号_升序_排序_向上_level_up</desc><style>
+    .kd-stroke-width-icon-bold { 
+       stroke-width: var(--kd-stroke-width-icon-bold, 1.2px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-bold"><path id="area1" d="M7.5 13.5V3M10.5 5.5L7.50707 2.50707C7.50317 2.50317 7.49683 2.50317 7.49293 2.50707L4.5 5.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

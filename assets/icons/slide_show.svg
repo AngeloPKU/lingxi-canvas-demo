@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>幻灯片浏览16_幻灯片_OldSlideSorter_SlideSorter</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-orange-primary {
+       fill: var(--kd-color-icon-orange-primary, #BF5513);
+       stroke: var(--kd-color-icon-orange-primary, #BF5513);
+       km_fill: #BF5513;
+       km_stroke: #BF5513;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M14 2.5H2C1.72386 2.5 1.5 2.72386 1.5 3V13C1.5 13.2761 1.72386 13.5 2 13.5H14C14.2761 13.5 14.5 13.2761 14.5 13V3C14.5 2.72386 14.2761 2.5 14 2.5Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_2" d="M3.5 4.51C3.5 4.50448 3.50448 4.5 3.51 4.5H6.49C6.49552 4.5 6.5 4.50448 6.5 4.51V6.49C6.5 6.49552 6.49552 6.5 6.49 6.5H3.51C3.50448 6.5 3.5 6.49552 3.5 6.49V4.51Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_3" d="M9.5 4.51C9.5 4.50448 9.50448 4.5 9.51 4.5H12.49C12.4955 4.5 12.5 4.50448 12.5 4.51V6.49C12.5 6.49552 12.4955 6.5 12.49 6.5H9.51C9.50448 6.5 9.5 6.49552 9.5 6.49V4.51Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_4" d="M3.5 9.51C3.5 9.50448 3.50448 9.5 3.51 9.5H6.49C6.49552 9.5 6.5 9.50448 6.5 9.51V11.49C6.5 11.4955 6.49552 11.5 6.49 11.5H3.51C3.50448 11.5 3.5 11.4955 3.5 11.49V9.51Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-1" class="kd-color-icon-orange-primary kd-stroke-width-icon-regular"><path id="line_5" d="M9.5 9.51C9.5 9.50448 9.50448 9.5 9.51 9.5H12.49C12.4955 9.5 12.5 9.50448 12.5 9.51V11.49C12.5 11.4955 12.4955 11.5 12.49 11.5H9.51C9.50448 11.5 9.5 11.4955 9.5 11.49V9.51Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

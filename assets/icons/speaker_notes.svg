@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" km_stroke-width="1" km_darkmode="true" kd_rtl="mirror" requiredCustomFeatures="data-kd-color-scheme,data-kd-rtl-mirror-scheme"><desc>演讲者备注16_演讲备注_SpeakerNotes_speaker_notes</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-orange-primary {
+       fill: var(--kd-color-icon-orange-primary, #BF5513);
+       stroke: var(--kd-color-icon-orange-primary, #BF5513);
+       km_fill: #BF5513;
+       km_stroke: #BF5513;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="Vector 1808" d="M2 1.5H14C14.2761 1.5 14.5 1.72386 14.5 2V12C14.5 12.2761 14.2761 12.5 14 12.5H2C1.72386 12.5 1.5 12.2761 1.5 12V2C1.5 1.72386 1.72386 1.5 2 1.5Z" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="Vector 1993" d="M3.5 4V6C3.5 6.27614 3.72386 6.5 4 6.5H12C12.2761 6.5 12.5 6.27614 12.5 6V4C12.5 3.72386 12.2761 3.5 12 3.5H4C3.72386 3.5 3.5 3.72386 3.5 4Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="Vector 1995" d="M3.5 8.5H12.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="Vector 1994" d="M3.5 10.5H9.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-1" class="kd-color-icon-orange-primary kd-stroke-width-icon-regular"><path id="Vector 1998" d="M1.5 14.5H3.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="Vector 1999" d="M5.5 14.5H14.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

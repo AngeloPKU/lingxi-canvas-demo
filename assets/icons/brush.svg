@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>刷16_格式刷_FormatPainter_brush_FormatPainterQat</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-orange-primary {
+       fill: var(--kd-color-icon-orange-primary, #BF5513);
+       stroke: var(--kd-color-icon-orange-primary, #BF5513);
+       km_fill: #BF5513;
+       km_stroke: #BF5513;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-orange-primary kd-stroke-width-icon-regular"><path id="line" d="M2.5 7.5H13.5" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line_2" d="M9.5 11C9.5 11.6667 9.3 13.3 8.5 14.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_3" d="M14.5 6V7.00002C14.5 7.27615 14.2762 7.50001 14 7.50002L13.5 7.50003V11.3436C13.5 12.4237 13.1803 13.4796 12.5812 14.3782C12.5305 14.4543 12.4451 14.5 12.3536 14.5H1.77781C1.64474 14.5 1.55376 14.3656 1.60317 14.2421C2.19562 12.761 2.5 11.1804 2.5 9.58525V7.5H2C1.72386 7.5 1.5 7.27614 1.5 7V6C1.5 5.17157 2.17157 4.5 3 4.5H6.5V4L6.29057 3.37171C5.90164 2.20492 6.7701 1 8 1C9.2299 1 10.0984 2.20492 9.70943 3.37171L9.5 4V4.5H13C13.8284 4.5 14.5 5.17157 14.5 6Z" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

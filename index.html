@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>灵犀 - 可交互原型</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="window">
+
+  <!-- ===== 下沉左侧栏 270px ===== -->
+  <aside class="sidebar">
+    <!-- 项目顶部 52px -->
+    <div class="titlebar">
+      <div class="traffic">
+        <span class="tl close"></span><span class="tl mini"></span><span class="tl zoom"></span>
+      </div>
+      <button class="nav-pane-btn" id="btn-collapse" title="收起侧栏">
+        <img src="assets/icons/navigation_pane_down.svg" width="16" height="16" alt="">
+      </button>
+    </div>
+
+    <!-- 灵犀侧栏 -->
+    <div class="side-panel">
+      <div class="logo-row">
+        <span class="logo-name">灵犀</span>
+        <img class="logo-tag" src="assets/icons/tag.svg" width="44" height="18" alt="WPS 灵犀">
+      </div>
+
+      <div class="menu" id="menu"><!-- JS 渲染 --></div>
+
+      <!-- user 56px -->
+      <div class="user-row">
+        <img class="avatar" src="assets/icons/avatar.png" width="28" height="28" alt="">
+        <div class="user-btns">
+          <button class="pill-btn" title="积分">
+            <img src="assets/icons/star_two.svg" width="16" height="16" alt="">
+            <span>1500</span>
+          </button>
+          <button class="round-btn" title="礼物"><img src="assets/icons/gift.svg" width="16" height="16" alt=""></button>
+          <button class="round-btn" title="通知">
+            <img src="assets/icons/bell.svg" width="16" height="16" alt="">
+            <span class="red-dot"></span>
+          </button>
+          <button class="round-btn" title="设置"><img src="assets/icons/setup.svg" width="16" height="16" alt=""></button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== Main Section ===== -->
+  <main class="main">
+
+    <!-- 首页 -->
+    <section class="view view-home" id="view-home">
+      <div class="glow"></div>
+      <div class="home-pane">
+        <div class="welcome-row">
+          <img class="welcome-logo" src="assets/icons/灵犀LOGO.svg" width="32" height="32" alt="">
+          <h1 class="welcome-text">你好<span class="w-comma">,</span><span class="w-fz">今天想完成哪件工作?</span></h1>
+        </div>
+
+        <div class="composer-wrap">
+          <div class="composer">
+            <textarea id="home-input" spellcheck="false" placeholder="描述一个复杂目标，灵犀会规划、执行并汇报进度"></textarea>
+            <div class="composer-bar">
+              <div class="bar-left">
+                <button class="icon-btn" id="home-plus" title="添加"><img src="assets/icons/symbol_cross.svg" width="16" height="16" alt=""></button>
+                <button class="exp-pill" title="专家模式">
+                  <img src="assets/icons/knowledge_graph.svg" width="16" height="16" alt="">
+                  <span>专家模式：开</span>
+                </button>
+                <button class="icon-btn" title="安全保护"><img src="assets/icons/shield.svg" width="16" height="16" alt=""></button>
+              </div>
+              <div class="bar-right">
+                <button class="pro-pill" title="模式">
+                  <span>Pro 模式</span>
+                  <img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt="">
+                </button>
+                <button class="mic-btn" data-send="home" title="发送"><img src="assets/icons/microphone.svg" width="16" height="16" alt=""></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-below">
+          <div class="tabs" id="tabs">
+            <button class="tab active" data-tab="project">项目</button>
+            <button class="tab" data-tab="recent">最近文档</button>
+          </div>
+          <p class="tabs-desc">项目汇聚相同主题的会话与文档，作为你与灵犀对话时的共同上下文。</p>
+          <div class="card-row" id="card-row"><!-- JS 渲染 --></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 对话视图：对话列 + Canvas 分屏 -->
+    <section class="view view-chat" id="view-chat" hidden>
+      <div class="chat-col" id="chat-col">
+        <div class="chat-top">
+          <div class="chat-title-block">
+            <div class="chat-title" id="chat-title">新任务</div>
+            <div class="chat-ai-note">内容由 AI 生成</div>
+          </div>
+          <div class="chat-top-btns">
+            <button class="light-btn round" id="btn-share"><img src="assets/icons/share_to.svg" width="16" height="16" alt=""><span>分享</span></button>
+            <button class="light-btn r8" id="btn-space"><img src="assets/icons/archive.svg" width="16" height="16" alt=""><span>任务空间</span></button>
+          </div>
+        </div>
+
+        <div class="chat-scroll" id="chat-scroll">
+          <div class="feed" id="feed"><!-- JS 渲染消息 --></div>
+        </div>
+
+        <div class="chat-bottom">
+          <div class="status-row" id="status-row">
+            <img src="assets/icons/lingxi_logo_s.svg" width="20" height="20" alt="">
+            <span class="status-text" id="status-text">灵犀已就绪</span>
+            <img class="status-arrow" src="assets/icons/arrow_right_s.svg" width="16" height="16" alt="">
+          </div>
+          <div class="composer-wrap">
+            <div class="composer">
+              <div class="composer-input" id="chat-input" contenteditable="true" spellcheck="false" data-placeholder="描述一个复杂目标，灵犀会规划、执行并汇报进度"></div>
+              <div class="composer-bar">
+                <div class="bar-left">
+                  <button class="icon-btn" title="添加"><img src="assets/icons/symbol_cross.svg" width="16" height="16" alt=""></button>
+                  <button class="exp-pill" title="专家模式">
+                    <img src="assets/icons/knowledge_graph.svg" width="16" height="16" alt="">
+                    <span>专家模式：开</span>
+                  </button>
+                  <button class="icon-btn" title="安全保护"><img src="assets/icons/shield.svg" width="16" height="16" alt=""></button>
+                </div>
+                <div class="bar-right">
+                  <button class="pro-pill" title="模式">
+                    <span>Pro 模式</span>
+                    <img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt="">
+                  </button>
+                  <button class="mic-btn" data-send="chat" title="发送"><img src="assets/icons/microphone.svg" width="16" height="16" alt=""></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Canvas 分屏面板（规格取自 Figma 21:3389 / 21:3999） ===== -->
+      <aside class="canvas-panel" id="canvas-panel" hidden>
+        <!-- 第一行：文件 tab + 关闭 / 全屏 / 收起侧栏 -->
+        <div class="canvas-row canvas-row1">
+          <div class="canvas-row-left">
+            <div class="canvas-tabs" id="canvas-tabs"><!-- JS 渲染 --></div>
+            <button class="cv-icon-btn" id="btn-canvas-close" title="关闭"><img src="assets/icons/symbol_cross.svg" width="16" height="16" alt=""></button>
+          </div>
+          <div class="canvas-row-right">
+            <button class="cv-icon-btn" id="btn-canvas-expand" title="全屏显示"><img src="assets/icons/screen_expand.svg" width="16" height="16" alt=""></button>
+            <button class="cv-icon-btn" id="btn-canvas-sidebar" title="收起侧栏"><img src="assets/icons/sidebar_left.svg" width="16" height="16" alt=""></button>
+          </div>
+        </div>
+        <!-- 第二行：文件名 + 分享/下载/更多 -->
+        <div class="canvas-row canvas-row2">
+          <div class="canvas-file">
+            <img id="canvas-file-icon" src="assets/icons/wps_format_s.svg" width="16" height="16" alt="">
+            <span id="canvas-file-name"></span>
+          </div>
+          <div class="canvas-row-right">
+            <button class="cv-icon-btn circle-bg" id="btn-canvas-share" title="分享"><img src="assets/icons/share_to.svg" width="16" height="16" alt=""></button>
+            <button class="cv-save-btn" id="btn-canvas-save" title="保存"><img src="assets/icons/save.svg" width="14" height="14" alt=""><span>保存</span></button>
+            <button class="cv-icon-btn" id="btn-canvas-download" title="下载"><img src="assets/icons/download.svg" width="16" height="16" alt=""></button>
+            <button class="cv-icon-btn" id="btn-canvas-more" title="更多"><img src="assets/icons/more.svg" width="16" height="16" alt=""></button>
+          </div>
+        </div>
+        <!-- 置顶工具栏：按文档类型渲染（KDesign 规范：底板 #F5F5F5、按钮 Medium 28px） -->
+        <div class="canvas-toolbar" id="canvas-toolbar"><!-- JS 渲染 --></div>
+        <!-- 文档内容区 -->
+        <div class="canvas-editbar" id="canvas-editbar" hidden></div>
+        <div class="canvas-content" id="canvas-content"><!-- JS 渲染 --></div>
+      </aside>
+    </section>
+
+    <!-- 任务空间视图（占位） -->
+    <section class="view view-space" id="view-space" hidden>
+      <div class="chat-top">
+        <div class="chat-title-block">
+          <div class="chat-title">任务空间</div>
+        </div>
+        <div class="chat-top-btns">
+          <button class="light-btn r8" id="btn-back-chat"><img src="assets/icons/archive.svg" width="16" height="16" alt=""><span>返回对话</span></button>
+        </div>
+      </div>
+      <div class="space-placeholder">
+        <div class="sp-title">任务空间</div>
+        <div class="sp-sub">当前原型聚焦「对话模式」，任务空间面板暂未纳入本次还原范围。</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 选区悬浮工具栏（KDesign Popover 容器 + 线上截图布局） -->
+<div class="sel-toolbar" id="sel-toolbar" hidden>
+  <button class="st-ai" id="sel-ai"><img src="assets/icons/lingxi_logo_s.svg" width="18" height="18" alt=""><span>AI 编辑</span></button>
+  <span class="tb-sep"></span>
+  <button class="tb-select" data-noop><span class="tb-val">宋体</span><img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt=""></button>
+  <button class="tb-select" data-noop><span class="tb-val">54</span><img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt=""></button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" data-noop title="加粗"><img src="assets/icons/bold_wps.svg" width="16" height="16" alt=""></button>
+  <button class="tb-btn" data-noop title="倾斜"><img src="assets/icons/italic.svg" width="16" height="16" alt=""></button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" data-noop title="字体颜色"><img src="assets/icons/color_font_wps.svg" width="16" height="16" alt=""></button>
+  <button class="tb-btn" data-noop title="填充颜色"><img src="assets/icons/color_paint_wps.svg" width="16" height="16" alt=""></button>
+  <span class="tb-sep"></span>
+  <button class="tb-btn" data-noop title="对齐"><img src="assets/icons/align_left.svg" width="16" height="16" alt=""></button>
+  <button class="tb-btn" data-noop title="列表"><img src="assets/icons/add_item.svg" width="16" height="16" alt=""></button>
+</div>
+
+<!-- AI 编辑浮层：选区标签 + 指令输入 + 发送/添加 -->
+<div class="sel-popover" id="sel-popover" hidden>
+  <div class="sp-head" id="sel-pop-pill"></div>
+  <textarea id="sel-pop-input" spellcheck="false" placeholder="告诉灵犀如何处理这个选区"></textarea>
+  <div class="sp-foot">
+    <button class="sp-add" id="sel-pop-add">添加</button>
+    <button class="sp-send" id="sel-pop-send">发送</button>
+  </div>
+</div>
+
+<!-- 选区 pill hover 详情 -->
+<div id="pill-tip" hidden></div>
+
+<!-- [Modal: sm C1] 草稿期切换文件确认 / 无白卡片 / 0 个真组 -->
+<div class="kd-mask" id="switch-mask" hidden>
+  <div class="kd-modal kd-modal-sm">
+    <div class="kd-modal-content">
+      <div class="kd-modal-header">
+        <div class="kd-modal-title">切换文件</div>
+      </div>
+      <div class="kd-modal-body">对话框有文档选区。如果切换查看新文件，当前选区将被清空。是否确认切换？</div>
+    </div>
+    <div class="kd-modal-footer">
+      <button class="kd-button kd-button-secondary" id="switch-cancel">取消</button>
+      <button class="kd-button kd-button-primary" id="switch-ok">确认切换</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>斜体16_倾斜_Italic</desc><style>
+    .kd-stroke-width-icon-bold { 
+       stroke-width: var(--kd-stroke-width-icon-bold, 1.2px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-bold"><path id="group-0_2" d="M7.5 2.6001H9M10.5 2.6001H9M4.5 13.4001H6M7.5 13.4001H6M9 2.6001L6 13.4001" stroke-linecap="round" stroke-linejoin="bevel" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

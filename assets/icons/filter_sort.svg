@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>高级筛选16_</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-green-primary {
+       fill: var(--kd-color-icon-green-primary, #20804E);
+       stroke: var(--kd-color-icon-green-primary, #20804E);
+       km_fill: #20804E;
+       km_stroke: #20804E;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-green-primary kd-stroke-width-icon-regular"><path id="line" d="M8 9.5H14M8 12.5H12" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line_2" d="M7.29636 13.7563L5.51383 14.4943C5.50724 14.497 5.5 14.4922 5.5 14.485V8L1.64645 4.14645C1.55268 4.05268 1.5 3.9255 1.5 3.79289V2C1.5 1.72386 1.72386 1.5 2 1.5H13C13.2761 1.5 13.5 1.72386 13.5 2V3.79289C13.5 3.9255 13.4473 4.05268 13.3536 4.14645L10 7.5" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

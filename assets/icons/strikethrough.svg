@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>删除线16_Strikethought_DeleteLine</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-stroke-width-icon-bold { 
+       stroke-width: var(--kd-stroke-width-icon-bold, 1.2px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M1 9.40039H15" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-bold"><path id="line_2" d="M2.3985 6.79177C3.5952 5.94347 4.98188 5.94618 5.66269 6.44278C6.38697 6.97109 6.50161 7.79437 6.50161 8.85078C6.50161 9.69591 6.50161 11.4643 6.50161 12.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_3" d="M6.46021 9.00684C5.07284 9.36141 2.50801 9.07317 2.03645 10.5715C1.6371 11.8403 2.68931 12.7242 3.56247 12.7242C4.42012 12.7242 5.73564 12.1649 6.47974 10.1514" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_4" d="M8.5 3.5V12.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="line_5" d="M13.4992 9.6C13.4992 11.4377 12.4675 12.7 11.0881 12.7C9.58691 12.7 8.69922 11.36 8.69922 9.6C8.69922 7.80021 9.65433 6.5 11.0881 6.5C12.4494 6.5 13.4992 7.71199 13.4992 9.6Z" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/></g></svg>

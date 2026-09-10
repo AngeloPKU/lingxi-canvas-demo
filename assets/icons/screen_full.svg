@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" km_stroke-width="1" km_darkmode="true" kd_rtl="mirror" requiredCustomFeatures="data-kd-color-scheme,data-kd-rtl-mirror-scheme"><desc>全屏_全屏显示_fullscreenmode_fullscreenpagefit_fullscreen_展开</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line" d="M10.5 1.5H14.49C14.4955 1.5 14.5 1.50448 14.5 1.51V5.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_2" d="M1.5 10.5V14.49C1.5 14.4955 1.50448 14.5 1.51 14.5H5.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line " d="M14 2L10.5 5.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line _2" d="M2 14L5.5 10.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="line_3" d="M5.5 1.5H2C1.72386 1.5 1.5 1.72386 1.5 2V5.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><path id="line_4" d="M14.5 10.5V14C14.5 14.2761 14.2761 14.5 14 14.5H10.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" requiredCustomFeatures="data-kd-color-scheme" km_stroke-width="1" km_darkmode="true"><desc>从头开始16_FromCurrentSlide_from_current_slide</desc><style>
+    .kd-stroke-width-icon-regular { 
+       stroke-width: var(--kd-stroke-width-icon-regular, 1px)
+    }
+    .kd-color-icon-primary {
+       fill: var(--kd-color-icon-primary, #333333);
+       stroke: var(--kd-color-icon-primary, #333333);
+       km_fill: #333333;
+       km_stroke: #333333;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }
+    .kd-color-icon-orange-primary {
+       fill: var(--kd-color-icon-orange-primary, #BF5513);
+       stroke: var(--kd-color-icon-orange-primary, #BF5513);
+       km_fill: #BF5513;
+       km_stroke: #BF5513;
+       km_darkmode_fill: #C7C7C7;
+       km_darkmode_stroke: #C7C7C7; 
+    }</style><g id="group-1" class="kd-color-icon-orange-primary kd-stroke-width-icon-regular"><path id="line" d="M8.5 13.9777V8.02231C8.5 7.79077 8.75116 7.64651 8.95116 7.76318L14.0558 10.7409C14.2542 10.8566 14.2542 11.1434 14.0558 11.2591L8.95116 14.2368C8.75116 14.3535 8.5 14.2092 8.5 13.9777Z" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g><g id="group-0" class="kd-color-icon-primary kd-stroke-width-icon-regular"><path id="Vector 1808" d="M14.5 9V2C14.5 1.72386 14.2761 1.5 14 1.5H2C1.72386 1.5 1.5 1.72386 1.5 2V12C1.5 12.2761 1.72386 12.5 2 12.5H6" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/><path id="Vector 1868" d="M4.5 10.5L6.14645 12.1464C6.34171 12.3417 6.34171 12.6583 6.14645 12.8536L4.5 14.5" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></g></svg>
