@@ -394,3 +394,142 @@ function pptSavePage(content, doc) {
 function escHtml(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
+/* ---------- 默认演示会话：含文档 / 演示 / 表格三条生成记录 ---------- */
+// 演示会话专用内容：围绕「小米 YU7 vs Model Y 焕新版」主题，贴近真实交付物
+function demoDocxHtml() {
+  return `
+  <div class="doc-app">
+    <div class="doc-scroll">
+      <div class="doc-sheet" contenteditable="true" spellcheck="false">
+        <div class="doc-kicker">对比调研报告 · COMPARATIVE STUDY</div>
+        <h1>小米YU7与特斯拉Model Y焕新版对比调研报告</h1>
+        <p style="color:#8a9099;font-size:12px;">调研周期：2026 年 6–8 月 · 数据来源：公开参数、终端走访与车主社区抽样</p>
+        <h2>一、调研背景</h2>
+        <p>小米 YU7 上市后，与特斯拉 Model Y 焕新版在 25–35 万元纯电 SUV 区间形成直接竞争。本报告围绕产品力、价格策略与用户口碑三个维度展开对比，为选购决策与竞争策略提供参考。</p>
+        <h2>二、核心参数对比</h2>
+        <table class="doc-table">
+          <tr><th>维度</th><th>小米 YU7</th><th>Model Y 焕新版</th></tr>
+          <tr><td>指导价区间</td><td>25.35 万 – 32.99 万</td><td>26.35 万 – 31.35 万</td></tr>
+          <tr><td>CLTC 续航</td><td>835 km（顶配）</td><td>719 km（顶配）</td></tr>
+          <tr><td>0-100 km/h 加速</td><td>3.23 s（Max 版）</td><td>4.3 s（长续航全轮驱动）</td></tr>
+          <tr><td>智能驾驶</td><td>小米 Pilot Max，全系激光雷达</td><td>FSD（中国版待推送）</td></tr>
+          <tr><td>座舱生态</td><td>澎湃 OS，手机-车-家全链路</td><td>以车机为中心，生态相对封闭</td></tr>
+        </table>
+        <h2>三、用户口碑对比</h2>
+        <p>车主社区抽样显示：YU7 的好评集中在续航达成率、座舱互联与性价比，吐槽集中在交付周期与售后网点覆盖；Model Y 的好评集中在操控质感与能耗管理，吐槽集中在内饰简约度与乘坐舒适性。两车口碑分化与目标人群画像高度相关。</p>
+        <h2>四、结论与建议</h2>
+        <p>短期看，YU7 在产品力参数与生态互联上占优，适合重视智能体验与配置的用户；Model Y 在品牌心智、补能网络与保值率上仍有优势。建议持续跟踪两车智驾功能推送节奏与终端优惠变化，每季度更新一次对比口径。</p>
+      </div>
+    </div>
+    <div class="doc-status">
+      <div class="ds-left">
+        <span class="ds-item">页面: 1/1</span>
+        <span class="ds-item">节: 1/1</span>
+        <span class="ds-item">行: 1</span>
+        <span class="ds-item">列: 1</span>
+        <span class="ds-item">字数: 612</span>
+      </div>
+      <div class="ds-right">
+        <button class="tb-btn" title="显示/隐藏"><img src="assets/icons/eye.svg" width="16" height="16" alt=""></button>
+        <button class="tb-btn ds-zoom" title="缩小">−</button>
+        <span class="ds-item">100%</span>
+        <button class="tb-btn ds-zoom" title="放大">＋</button>
+        <button class="tb-btn" title="适应宽度"><img src="assets/icons/fit_width.svg" width="16" height="16" alt=""></button>
+        <button class="tb-btn" title="全屏"><img src="assets/icons/screen_full.svg" width="16" height="16" alt=""></button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function demoPptPages() {
+  return [
+    { v: '小米YU7与Model Y焕新版对比汇报', k: '小米汽车 × 特斯拉 · 对比研究', t: '小米YU7 与 Model Y 焕新版对比汇报', s: '产品力 · 价格 · 口碑 三维对比', chips: ['调研背景', '参数对比', '口碑洞察', '结论建议'], f: '灵犀产品组 · 2026 年 9 月', note: '' },
+    { v: '目录', k: 'CONTENTS', t: '目录', s: '四个部分，覆盖从背景到建议的完整链路', chips: ['01 核心参数对比', '02 智驾与座舱', '03 用户口碑洞察', '04 结论与下一步'], f: '', note: '' },
+    { v: '核心参数对比', k: '01', t: '核心参数对比', s: 'YU7 在续航与加速上领先，价格带重叠度高', chips: ['指导价 25.35–32.99 万', 'CLTC 835 km vs 719 km', '3.23 s vs 4.3 s'], f: '', note: '补一张价格带分布图' },
+    { v: '智驾与座舱', k: '02', t: '智驾与座舱：两种路线', s: 'YU7 全链路生态 vs Model Y 车机为中心', chips: ['全系激光雷达', '澎湃 OS 互联', 'FSD 待推送'], f: '', note: '' },
+    { v: '用户口碑洞察', k: '03', t: '用户口碑洞察', s: '好评与吐槽高度分化，对应两类人群画像', chips: ['续航达成率', '交付周期', '保值率'], f: '', note: '' },
+    { v: '结论与下一步', k: '04', t: '结论与下一步', s: '按人群推荐，季度更新对比口径', chips: ['智能体验优先选 YU7', '品牌与保值选 Model Y', '季度复盘机制'], f: '', note: '' },
+  ];
+}
+
+function demoXlsxHtml() {
+  const rows = [
+    ['YU7 标准版', '25.35', '835', '5.9', '31,200', '92%'],
+    ['YU7 Pro', '27.99', '770', '4.6', '24,800', '93%'],
+    ['YU7 Max', '32.99', '760', '3.23', '9,600', '94%'],
+    ['Model Y 后驱', '26.35', '593', '6.9', '28,400', '89%'],
+    ['Model Y 长续航全轮驱动', '31.35', '719', '4.3', '15,700', '90%'],
+  ];
+  const dataRows = rows.map((r, i) => `
+            <tr><th>${i + 3}</th><td><div class="cell">${r[0]}</div></td><td class="num"><div class="cell">${r[1]}</div></td><td class="num"><div class="cell">${r[2]}</div></td><td class="num"><div class="cell">${r[3]}</div></td><td class="num"><div class="cell">${r[4]}</div></td><td class="num"><div class="cell">${r[5]}</div></td></tr>`).join('');
+  return `
+  <div class="et-app">
+    <div class="et-formula">
+      <div class="et-namebox">A1</div>
+      <button class="et-fx" title="插入函数"><i>fx</i></button>
+      <div class="et-editbar">小米YU7与Model Y焕新版核心数据对比</div>
+    </div>
+    <div class="et-gridwrap">
+      <table class="et-grid">
+        <colgroup><col style="width:44px"><col span="6"></colgroup>
+        <thead>
+          <tr><th class="et-corner"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+        </thead>
+        <tbody>
+          <tr class="et-selrow"><th>1</th><td colspan="6" class="et-sel"><div class="cell et-title">小米YU7与Model Y焕新版核心数据对比</div></td></tr>
+          <tr class="et-head"><th>2</th><td><div class="cell">车型</div></td><td><div class="cell">指导价(万)</div></td><td><div class="cell">CLTC续航(km)</div></td><td><div class="cell">0-100加速(s)</div></td><td><div class="cell">月均销量(辆)</div></td><td><div class="cell">车主好评率</div></td></tr>
+          ${dataRows}
+          <tr><th>8</th><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+          <tr><th>9</th><td><div class="cell" style="color:#a0a6ae;">口径：2026 年 6–8 月均值</div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+          <tr><th>10</th><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+          <tr><th>11</th><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+          <tr><th>12</th><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td><td><div class="cell"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="et-status">
+      <button class="tb-btn" title="工作表"><img src="assets/icons/sheet.svg" width="16" height="16" alt=""></button>
+      <div class="et-tabs">
+        <button class="et-tab c-green active">车型对比</button>
+        <button class="et-tab c-blue">月度销量</button>
+        <button class="et-tab c-orange">数据来源</button>
+      </div>
+      <div class="et-tabs-nav">
+        <button class="tb-btn" title="上一个">«</button>
+        <button class="tb-btn" title="下一个">»</button>
+        <button class="tb-btn" title="新建工作表">＋</button>
+      </div>
+      <div class="ds-right">
+        <button class="tb-btn" title="批注"><img src="assets/icons/comment_shape.svg" width="16" height="16" alt=""></button>
+        <button class="tb-btn" title="更多"><img src="assets/icons/more_two.svg" width="16" height="16" alt=""></button>
+      </div>
+    </div>
+  </div>`;
+}
+
+const DEMO_SEED = (() => {
+  const q1 = '写一份小米 YU7 和特斯拉 Model Y 焕新版的对比调研报告';
+  const q2 = '帮我把这份报告转为 PPT 演示文稿';
+  const q3 = '把报告里的核心数据整理成表格';
+  const r1 = buildDocReply('docx', q1);
+  const r2 = buildDocReply('pptx', q2);
+  const r3 = buildDocReply('xlsx', q3);
+  // 文件名与内容对齐主题
+  r1.doc.name = '小米YU7与特斯拉ModelY焕新版对比调研报告.docx';
+  r1.doc.topic = '小米YU7与特斯拉ModelY焕新版对比调研报告';
+  r1.doc.html = demoDocxHtml();
+  r2.doc.name = '小米YU7与ModelY焕新版对比汇报.pptx';
+  r2.doc.topic = '小米YU7与ModelY焕新版对比汇报';
+  r2.doc.pages = demoPptPages();
+  r3.doc.name = '小米YU7与ModelY焕新版核心数据对比.xlsx';
+  r3.doc.topic = '小米YU7与ModelY焕新版核心数据对比';
+  r3.doc.html = demoXlsxHtml();
+  return {
+    title: '小米 YU7 与特斯拉 Model Y 焕新版对比调研',
+    messages: [
+      { role: 'user', text: q1 }, { role: 'ai', reply: r1 },
+      { role: 'user', text: q2 }, { role: 'ai', reply: r2 },
+      { role: 'user', text: q3 }, { role: 'ai', reply: r3 },
+    ],
+  };
+})();

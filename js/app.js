@@ -991,7 +991,7 @@
     const doc = displayedDoc;
     if (!doc || $('#canvas-panel').hidden) { bar.hidden = true; return; }
     if (doc.updating) { bar.hidden = true; }
-    else if (doc.editing) { bar.hidden = false; bar.className = 'canvas-editbar'; bar.textContent = '本文档正在被灵犀编辑中，手动修改的内容可能丢失。'; }
+    else if (doc.editing) { bar.hidden = false; $('#canvas-editbar-text').textContent = '本文档正在被灵犀编辑中，手动修改的内容可能丢失。'; }
     else bar.hidden = true;
   }
 
@@ -1278,7 +1278,13 @@
     $$('.pro-pill').forEach((b) => b.onclick = () => toast('原型演示：模式切换暂未接入'));
     $('#status-row').onclick = () => toast('原型演示：状态详情暂未接入');
 
-    showView('home');
+    // 默认打开演示会话（含文档/演示/表格三条生成记录）
+    const demo = { id: 'demo', title: DEMO_SEED.title, messages: DEMO_SEED.messages };
+    sessions.unshift(demo);
+    currentId = demo.id;
+    rebuildFeed();
+    renderMenu();
+    showView('chat');
   }
 
   init();
