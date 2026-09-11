@@ -43,7 +43,7 @@
             <img src="assets/icons/bell.svg" width="16" height="16" alt="">
             <span class="red-dot"></span>
           </button>
-          <button class="round-btn" title="设置"><img src="assets/icons/setup.svg" width="16" height="16" alt=""></button>
+          <button class="round-btn" id="btn-settings" title="设置"><img src="assets/icons/setup.svg" width="16" height="16" alt=""></button>
         </div>
       </div>
     </div>
@@ -219,8 +219,7 @@
 <div id="pill-tip" hidden></div>
 
 <!-- [Modal: sm C1] 草稿期切换文件确认 / 无白卡片 / 0 个真组 -->
-<div class="kd-mask" id="switch-mask" hidden>
-  <div class="kd-modal kd-modal-sm">
+<div class="kd-mask" id="switch-mask" hidden>  <div class="kd-modal kd-modal-sm">
     <div class="kd-modal-content">
       <div class="kd-modal-header">
         <div class="kd-modal-title">切换文件</div>
@@ -230,6 +229,25 @@
     <div class="kd-modal-footer">
       <button class="kd-button kd-button-secondary" id="switch-cancel">取消</button>
       <button class="kd-button kd-button-primary" id="switch-ok">确认切换</button>
+    </div>
+  </div>
+</div>
+
+<!-- [Modal: sm C1] DeepSeek API Key 设置 / 无白卡片 / 0 个真组 -->
+<div class="kd-mask" id="key-mask" hidden>
+  <div class="kd-modal kd-modal-sm">
+    <div class="kd-modal-content">
+      <div class="kd-modal-header"><div class="kd-modal-title">DeepSeek API 设置</div></div>
+      <div class="kd-modal-body">
+        <label class="kd-field-label" for="key-input">API Key</label>
+        <input class="kd-field-input" id="key-input" type="password" placeholder="sk-…" autocomplete="off" spellcheck="false">
+        <div class="kd-modal-hint">Key 仅保存在本浏览器（localStorage），不上传、不进代码仓库。配置后，带选区发送时灵犀会调用 DeepSeek 真实修改右侧文档内容。</div>
+      </div>
+    </div>
+    <div class="kd-modal-footer">
+      <button class="kd-button kd-button-secondary" id="key-default">填入默认 Key</button>
+      <button class="kd-button kd-button-secondary" id="key-cancel">取消</button>
+      <button class="kd-button kd-button-primary" id="key-save">保存</button>
     </div>
   </div>
 </div>

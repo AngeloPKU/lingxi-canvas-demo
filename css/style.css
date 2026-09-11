@@ -581,6 +581,14 @@ textarea { font-family: inherit; }
 .kd-button-secondary:hover { background: #f0f0f0; }
 .kd-button-primary { background: #0a6cff; color: #fff; }
 .kd-button-primary:hover { background: #3b89ff; }
+.kd-field-label { display: block; font-size: 13px; font-weight: 400; line-height: 20px; color: #0d0d0d; margin-bottom: 4px; }
+.kd-field-input { width: 100%; height: 32px; border: 1px solid rgba(13,13,13,.15); border-radius: 6px; padding: 0 10px; font: inherit; font-size: 13px; color: #0d0d0d; outline: none; background: #fff; }
+.kd-field-input:focus { border-color: #0a6cff; }
+.kd-modal-hint { font-size: 12px; line-height: 18px; color: #757575; margin-top: 8px; }
+
+/* AI 修改锚点：平时不可见，处理期间淡橙高亮标示“AI 将改这里” */
+.sel-anchor { background: transparent; }
+.sel-anchor.sel-anchor-active { background: rgba(226,101,26,.14); border-radius: 2px; }
 
 /* 第二行文件名：icon 16 + MiSans Medium 380 14/20，gap 4（Figma 21:3685） */
 .canvas-file { display: flex; align-items: center; gap: 4px; min-width: 0; }

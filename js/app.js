@@ -967,9 +967,12 @@
     if (running || !currentSel) return;
     const sel = Object.assign({}, currentSel);
     const instruction = $('#sel-pop-input').value.trim();
+    sel.instruction = instruction;
+    captureSelSnapshot(sel);
     closeSelPopover(true);
     clearNativeSel();
     hideSelToolbar();
+    clearXlsxRange();
     const segs = [{ t: 'sel', sel }];
     if (instruction) segs.push({ t: 'text', v: instruction });
     runSelFlow(segs);
@@ -978,10 +981,12 @@
     if (running) { toast('灵犀正在处理中，暂时不能添加选区'); return; }
     if (!currentSel) return;
     const instruction = $('#sel-pop-input').value.trim();
-    const copy = Object.assign({}, currentSel, { id: uid() });
+    const copy = Object.assign({}, currentSel, { id: uid(), instruction });
+    captureSelSnapshot(copy);
     closeSelPopover(true);
     clearNativeSel();
     hideSelToolbar();
+    clearXlsxRange();
     insertSelIntoComposer(copy, instruction);
   }
 
@@ -993,6 +998,140 @@
     if (doc.updating) { bar.hidden = true; }
     else if (doc.editing) { bar.hidden = false; $('#canvas-editbar-text').textContent = '本文档正在被灵犀编辑中，手动修改的内容可能丢失。'; }
     else bar.hidden = true;
+  }
+
+  /* ---------- DeepSeek 真实修改（仅文字内容） ---------- */
+  const KEY_STORE = 'lingxi_deepseek_key';
+  // 内部演示用默认 Key（点「填入默认 Key」写入输入框，保存后仅存本浏览器）
+  const DEFAULT_KEY = 'sk-5e7798b55dd3411ab418b333a2b0508c';
+  const getApiKey = () => localStorage.getItem(KEY_STORE) || '';
+
+  async function callDeepSeek(system, user) {
+    const key = getApiKey();
+    if (!key) return { error: 'nokey' };
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 30000);
+    try {
+      const res = await fetch('https://api.deepseek.com/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
+        body: JSON.stringify({ model: 'deepseek-chat', temperature: 0.3, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+        signal: ctrl.signal,
+      });
+      if (!res.ok) return { error: 'HTTP ' + res.status };
+      const j = await res.json();
+      const t = ((j.choices || [])[0] || {}).message ? j.choices[0].message.content : '';
+      return String(t || '').trim() ? { text: String(t).trim() } : { error: 'empty' };
+    } catch (err) {
+      return { error: String((err && err.message) || err) };
+    } finally { clearTimeout(timer); }
+  }
+
+  const SYS_TEXT = '你是文档编辑助手。用户给你一段原文和修改要求。只输出修改后的文本本身：不要解释、不要加引号或代码块、不要 markdown 标记，保持原文语言与大致篇幅。';
+  const SYS_GRID = '你是表格编辑助手。用户给你一组单元格（JSON，键为单元格地址）和修改要求。只输出修改后的 JSON：键保持不变、只改值；只输出 JSON 本身，不要代码块与解释。';
+
+  // 发送/添加时固化修改目标：文字/演示转持久锚点，表格记单元格地址与原值
+  function captureSelSnapshot(sel) {
+    if (sel.type === 'xlsx') {
+      if (sel.cells) return;
+      sel.cells = [...$('#canvas-content').querySelectorAll('td.et-range')].map((td) => ({
+        addr: String.fromCharCode(64 + td.cellIndex) + td.parentElement.rowIndex,
+        v: td.innerText.trim(),
+      })).filter((c) => c.v);
+      return;
+    }
+    if (sel.anchorId) return;
+    if (selMarkEl) {
+      selMarkEl.dataset.anchor = sel.id;
+      selMarkEl.classList.remove('sel-mark');
+      selMarkEl.classList.add('sel-anchor');
+      sel.anchorId = sel.id;
+      selMarkEl = null;
+    }
+    if (sel.type === 'pptx' && boxSelEl) {
+      sel.pptPage = displayedDoc && displayedDoc.cur != null ? displayedDoc.cur : 0;
+      sel.pptField = boxSelEl.dataset.field || null;
+    }
+  }
+
+  function editOneSel(sel) {
+    if (sel.type === 'xlsx') {
+      const payload = {};
+      (sel.cells || []).forEach((c) => { payload[c.addr] = c.v; });
+      const instr = sel.instruction || '校对并规范化这些单元格的文字与数字，保持数据含义不变';
+      return callDeepSeek(SYS_GRID, '单元格：\n' + JSON.stringify(payload) + '\n\n修改要求：\n' + instr);
+    }
+    const instr = sel.instruction || '润色这段文字，保持原意与大致篇幅';
+    return callDeepSeek(SYS_TEXT, '原文：\n' + sel.text + '\n\n修改要求：\n' + instr);
+  }
+
+  function applyAnchorIn(rootEl, selId, aiText) {
+    const m = rootEl.querySelector('[data-anchor="' + selId + '"]');
+    if (!m) return false;
+    m.replaceWith(document.createTextNode(aiText));
+    return true;
+  }
+
+  function findCellByAddr(rootEl, addr) {
+    const mm = /^([A-Z]+)(\d+)$/.exec(addr || '');
+    if (!mm) return null;
+    let col = 0;
+    for (const ch of mm[1]) col = col * 26 + (ch.charCodeAt(0) - 64);
+    const row = +mm[2];
+    const trs = rootEl.querySelectorAll('.et-grid tbody tr');
+    for (const tr of trs) {
+      if (tr.rowIndex !== row) continue;
+      for (const td of tr.children) if (td.tagName === 'TD' && td.cellIndex === col) return td;
+    }
+    return null;
+  }
+
+  // 规则 B：选区内以 AI 为准；选区外的人工编辑经落盘保留
+  async function applyAiResult(sel, res) {
+    if (res.error) return 'fail';
+    const doc = sel.doc;
+    const live = displayedDoc === doc ? $('#canvas-content') : null;
+    if (sel.type === 'xlsx') {
+      let map = null;
+      try { map = JSON.parse(res.text.replace(/^```(?:json)?/i, '').replace(/```\s*$/, '')); } catch (e) { return 'fail'; }
+      if (!map || typeof map !== 'object') return 'fail';
+      const rootEl = live || Object.assign(document.createElement('div'), { innerHTML: doc.html });
+      let n = 0;
+      (sel.cells || []).forEach((c) => {
+        if (!(c.addr in map)) return;
+        const td = findCellByAddr(rootEl, c.addr);
+        if (!td) return;
+        (td.querySelector('.cell') || td).textContent = String(map[c.addr]);
+        n++;
+      });
+      if (!n) return 'skip';
+      doc.html = rootEl.innerHTML;
+      return 'ok';
+    }
+    if (sel.type === 'pptx') {
+      if (live && sel.anchorId && applyAnchorIn(live, sel.anchorId, res.text)) {
+        pptSavePage(live, doc);
+        return 'ok';
+      }
+      if (sel.pptField != null && doc.pages && doc.pages[sel.pptPage]) {
+        doc.pages[sel.pptPage][sel.pptField] = res.text;
+        return 'ok';
+      }
+      for (const p of (doc.pages || [])) {
+        for (const k of ['k', 't', 's', 'f', 'v', 'note']) {
+          if (typeof p[k] === 'string' && p[k].includes(sel.text)) { p[k] = p[k].replace(sel.text, res.text); return 'ok'; }
+        }
+      }
+      return 'skip';
+    }
+    const rootEl = live || Object.assign(document.createElement('div'), { innerHTML: doc.html });
+    if (sel.anchorId && applyAnchorIn(rootEl, sel.anchorId, res.text)) {
+      doc.html = rootEl.innerHTML;
+      return 'ok';
+    }
+    const escO = escHtml(sel.text);
+    if (doc.html.includes(escO)) { doc.html = doc.html.replace(escO, escHtml(res.text)); return 'ok'; }
+    return 'skip';
   }
 
   async function runSelFlow(segments) {
@@ -1016,6 +1155,18 @@
     segments.forEach((sg) => { if (sg.t === 'sel' && !affected.includes(sg.sel.doc)) affected.push(sg.sel.doc); });
     affected.forEach((d) => { d.editing = true; });
     refreshEditbar();
+
+    // 与步骤流并行发起真实 AI 调用
+    const sels = segments.filter((s) => s.t === 'sel').map((s) => s.sel);
+    sels.forEach(captureSelSnapshot);
+    sels.forEach((s) => {
+      const m = $('#canvas-content').querySelector('[data-anchor="' + s.id + '"]');
+      if (m) m.classList.add('sel-anchor-active');
+    });
+    const hasKey = !!getApiKey();
+    const aiPromise = hasKey
+      ? Promise.all(sels.map((sel) => editOneSel(sel).then((res) => ({ sel, res }))))
+      : Promise.resolve(sels.map((sel) => ({ sel, res: { error: 'nokey' } })));
 
     // 与普通生成同构的一条回复：打字动效 → 步骤流 → 流式正文 → 操作栏
     const sh = renderAiShell();
@@ -1041,6 +1192,32 @@
       nodes[i].querySelector('.st-ic').textContent = '✓';
     }
     sh.headText.textContent = `运行了 4 个命令，修改了 ${selCount} 处选区`;
+
+    // 先落盘人工编辑，再应用 AI 结果（选区内以 AI 为准）
+    saveCanvasEdits();
+    const results = await aiPromise;
+    let okN = 0, badN = 0;
+    for (const r of results) {
+      const st = await applyAiResult(r.sel, r.res);
+      if (st === 'ok') okN++; else badN++;
+    }
+    // 清理处理期锚点高亮/残留锚点（含处理期间被切走、锚点已落进 doc.html 的文档）
+    results.forEach(({ sel }) => {
+      const root = displayedDoc === sel.doc ? $('#canvas-content') : null;
+      if (root) {
+        const m = root.querySelector('[data-anchor="' + sel.id + '"]');
+        if (m) { m.classList.remove('sel-anchor-active', 'sel-anchor'); m.removeAttribute('data-anchor'); }
+      } else if (sel.doc && sel.doc.html) {
+        sel.doc.html = sel.doc.html
+          .split(' data-anchor="' + sel.id + '"').join('')
+          .split('sel-anchor-active ').join('')
+          .split('class="sel-anchor"').join('');
+      }
+    });
+    // 清理后把当前显示的干净 DOM 同步回文档数据，避免锚点残留进存储内容
+    saveCanvasEdits();
+    if (!hasKey) toast('未设置 DeepSeek API Key：侧栏「设置」中配置后可真实修改文档，本次按演示流程处理');
+    else if (okN + badN) toast('AI 已修改 ' + okN + ' 处' + (badN ? '，' + badN + ' 处未应用（调用失败或定位不到）' : ''));
 
     // 文件更新预览阶段（输入框仍锁定）：内容区白屏 loading
     affected.forEach((d) => { d.editing = false; d.updating = true; });
@@ -1277,6 +1454,21 @@
     });
     $$('.pro-pill').forEach((b) => b.onclick = () => toast('原型演示：模式切换暂未接入'));
     $('#status-row').onclick = () => toast('原型演示：状态详情暂未接入');
+
+    // DeepSeek API Key 设置
+    $('#btn-settings').onclick = () => {
+      $('#key-input').value = getApiKey();
+      $('#key-mask').hidden = false;
+    };
+    $('#key-cancel').onclick = () => { $('#key-mask').hidden = true; };
+    $('#key-default').onclick = () => { $('#key-input').value = DEFAULT_KEY; };
+    $('#key-save').onclick = () => {
+      const v = $('#key-input').value.trim();
+      if (v) localStorage.setItem(KEY_STORE, v); else localStorage.removeItem(KEY_STORE);
+      $('#key-mask').hidden = true;
+      toast(v ? 'API Key 已保存' : 'API Key 已清除');
+    };
+    $('#key-mask').onclick = (e) => { if (e.target === $('#key-mask')) $('#key-mask').hidden = true; };
 
     // 默认打开演示会话（含文档/演示/表格三条生成记录）
     const demo = { id: 'demo', title: DEMO_SEED.title, messages: DEMO_SEED.messages };
