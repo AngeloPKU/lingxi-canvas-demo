@@ -456,7 +456,7 @@ textarea { font-family: inherit; }
 /* ===== 选区悬浮工具栏（KDesign Popover 容器：白底/pad8/1px描边/shadow-large/r8；按钮 28px） ===== */
 .sel-toolbar {
   position: fixed; z-index: 1030;
-  display: flex; align-items: center; gap: 2px;
+  display: flex; flex-direction: column; gap: 2px;
   padding: 6px 8px;
   background: #fff;
   border: 1px solid #e5e5e5;
@@ -464,16 +464,25 @@ textarea { font-family: inherit; }
   box-shadow: 0 12px 32px rgba(13,13,13,.08);
 }
 .sel-toolbar[hidden] { display: none; }
-/* AI 编辑：首位按钮，灵犀 icon + 文字，轻量样式 */
+/* 每行按钮横排 */
+.st-row { display: flex; align-items: center; gap: 2px; }
+/* 单行横铺形态（pptx）：AI 编辑在行内首位 */
+.sel-toolbar.inline { flex-direction: row; align-items: center; }
+.sel-toolbar.inline .st-ai { margin-right: 4px; }
+/* AI 编辑入口 */
 .st-ai {
   height: 28px; display: flex; align-items: center; gap: 6px;
-  padding: 0 10px 0 6px; margin-right: 2px; border-radius: 6px;
+  padding: 0 10px 0 6px; border-radius: 6px;
   color: var(--ink); font-size: 13px; font-weight: 450; line-height: 20px;
 }
 .st-ai img { border-radius: 50%; }
 .st-ai:hover { background: rgba(13,13,13,.06); }
-/* 表格选区：只保留 AI 编辑 */
-.sel-toolbar.range-only [data-noop], .sel-toolbar.range-only .tb-sep { display: none; }
+/* 文字形态：AI 编辑沉底整行，与编辑区以分隔线分层 */
+.sel-toolbar.stacked .st-ai {
+  width: 100%; margin-top: 4px; padding: 6px 10px 6px 6px;
+  border-top: 1px solid rgba(13,13,13,.08); border-radius: 0 0 6px 6px;
+}
+.sel-toolbar.stacked .st-ai:hover { background: rgba(13,13,13,.04); }
 
 /* ===== 主输入框（contenteditable） ===== */
 .composer-input {

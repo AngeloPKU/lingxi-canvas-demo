@@ -592,10 +592,9 @@
 
   function showSelToolbar(rect) {
     const bar = $('#sel-toolbar');
+    renderSelToolbar(bar, currentSel ? currentSel.type : 'docx');
     bar.hidden = false;
     lastSelRect = rect;
-    // 表格选区只出 AI 编辑
-    bar.classList.toggle('range-only', !!(currentSel && currentSel.type === 'xlsx'));
     const w = bar.offsetWidth, h = bar.offsetHeight;
     let left = rect.left + rect.width / 2 - w / 2;
     left = Math.max(8, Math.min(left, innerWidth - w - 8));
@@ -679,9 +678,13 @@
       xlsxDrag.moved = true;
       markXlsxRange(xlsxDrag.anchor, td);
     });
-    // 占位按钮：展示用
-    bar.querySelectorAll('[data-noop]').forEach((b) => {
-      b.onclick = () => toast('原型演示：该按钮仅作展示');
+    // 工具栏内按钮：占位提示与 AI 编辑（动态渲染，用委托）
+    bar.addEventListener('click', (e) => {
+      if (e.target.closest('[data-noop]')) { toast('原型演示：该按钮仅作展示'); return; }
+      if (e.target.closest('.st-ai')) {
+        if (!currentSel) return;
+        openSelPopover(bar.getBoundingClientRect());
+      }
     });
     // 点浮层外（且不在选区工具栏上）关闭 AI 编辑浮层
     document.addEventListener('mousedown', (e) => {
@@ -724,10 +727,64 @@
       reconcilePending();
       if (!comp.innerText.trim() && !comp.querySelector('.sel-pill')) comp.innerHTML = '';
     });
-    $('#sel-ai').onclick = () => {
-      if (!currentSel) return;
-      openSelPopover($('#sel-toolbar').getBoundingClientRect());
-    };
+  }
+
+  /* ---------- 选区悬浮工具栏内容（按类型） ---------- */
+  // docx：两行编辑按钮 + 底部整行 AI 入口；pptx：单行、AI 在首位；xlsx：仅 AI
+  const SEL_TOOLBAR_ROWS = {
+    docx: [
+      [
+        { sel: '宋体 (正文)' }, { sel: '小五' }, '|',
+        ['font_size_increase_wps', '增大字号'], ['font_size_reduce_wps', '减小字号'],
+      ],
+      [
+        ['bold_wps', '加粗'], ['italic', '倾斜'], ['underscore', '下划线'], '|',
+        ['highlight', '突出显示'], ['color_font_wps', '字体颜色'], '|',
+        ['line_spacing', '行距'], ['align_left', '对齐'], '|', ['brush', '格式刷'],
+      ],
+    ],
+    pptx: [
+      [
+        ['bold_wps', '加粗'], ['italic', '倾斜'], ['underscore', '下划线'], '|',
+        ['color_font_wps', '字体颜色'], ['color_paint_wps', '填充颜色'], '|',
+        ['align_left', '对齐'], ['add_item', '列表'],
+      ],
+    ],
+    xlsx: [],
+  };
+
+  function renderSelToolbar(bar, type) {
+    bar.innerHTML = '';
+    const rows = SEL_TOOLBAR_ROWS[type] || [];
+    const stacked = type === 'docx';
+    bar.className = 'sel-toolbar' + (stacked ? ' stacked' : ' inline');
+    const ai = el('button', 'st-ai');
+    ai.id = 'sel-ai';
+    ai.appendChild(img('lingxi_logo_s', 18));
+    ai.appendChild(el('span', '', 'AI 编辑'));
+    if (!stacked) bar.appendChild(ai);
+    rows.forEach((row) => {
+      const r = el('div', 'st-row');
+      row.forEach((item) => {
+        if (item === '|') { r.appendChild(el('span', 'tb-sep')); return; }
+        if (item.sel) {
+          const s = el('button', 'tb-select');
+          s.dataset.noop = '1';
+          s.appendChild(el('span', 'tb-val', item.sel));
+          s.appendChild(img('arrow_down_s', 12));
+          s.title = item.sel;
+          r.appendChild(s);
+          return;
+        }
+        const b = el('button', 'tb-btn');
+        b.dataset.noop = '1';
+        b.appendChild(img(item[0], 16));
+        b.title = item[1];
+        r.appendChild(b);
+      });
+      bar.appendChild(r);
+    });
+    if (stacked) bar.appendChild(ai);
   }
 
   /* ---------- 选区 pill / AI 编辑浮层 / 混排发送 ---------- */

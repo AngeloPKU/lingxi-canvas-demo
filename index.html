@@ -199,22 +199,8 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- 选区悬浮工具栏（KDesign Popover 容器 + 线上截图布局） -->
-<div class="sel-toolbar" id="sel-toolbar" hidden>
-  <button class="st-ai" id="sel-ai"><img src="assets/icons/lingxi_logo_s.svg" width="18" height="18" alt=""><span>AI 编辑</span></button>
-  <span class="tb-sep"></span>
-  <button class="tb-select" data-noop><span class="tb-val">宋体</span><img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt=""></button>
-  <button class="tb-select" data-noop><span class="tb-val">54</span><img src="assets/icons/arrow_down_s.svg" width="12" height="12" alt=""></button>
-  <span class="tb-sep"></span>
-  <button class="tb-btn" data-noop title="加粗"><img src="assets/icons/bold_wps.svg" width="16" height="16" alt=""></button>
-  <button class="tb-btn" data-noop title="倾斜"><img src="assets/icons/italic.svg" width="16" height="16" alt=""></button>
-  <span class="tb-sep"></span>
-  <button class="tb-btn" data-noop title="字体颜色"><img src="assets/icons/color_font_wps.svg" width="16" height="16" alt=""></button>
-  <button class="tb-btn" data-noop title="填充颜色"><img src="assets/icons/color_paint_wps.svg" width="16" height="16" alt=""></button>
-  <span class="tb-sep"></span>
-  <button class="tb-btn" data-noop title="对齐"><img src="assets/icons/align_left.svg" width="16" height="16" alt=""></button>
-  <button class="tb-btn" data-noop title="列表"><img src="assets/icons/add_item.svg" width="16" height="16" alt=""></button>
-</div>
+<!-- 选区悬浮工具栏（KDesign Popover 容器；内容按文档类型渲染） -->
+<div class="sel-toolbar" id="sel-toolbar" hidden><!-- JS 渲染 --></div>
 
 <!-- AI 编辑浮层：选区标签 + 指令输入 + 发送/添加 -->
 <div class="sel-popover" id="sel-popover" hidden>
