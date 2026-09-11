@@ -819,7 +819,7 @@
   }
 
   /* ---------- 选区 pill / AI 编辑浮层 / 混排发送 ---------- */
-  const SEL_TYPE_TEXT = { docx: '文字选区', pptx: '演示选区', xlsx: '表格选区' };
+  const SEL_TYPE_TEXT = { docx: '选区', pptx: '选区', xlsx: '选区' };
   const selById = new Map();
 
   function makeSelPill(sel, opts) {

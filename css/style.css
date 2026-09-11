@@ -496,7 +496,7 @@ textarea { font-family: inherit; }
 /* ===== 选区 pill（样式按设计稿截图：浅暖灰底 r6 h28） ===== */
 .sel-pill {
   display: inline-flex; align-items: center; gap: 6px;
-  height: 28px; padding: 0 6px; margin: 0 2px; border-radius: 6px;
+  height: 28px; padding: 0 6px; margin: 0 6px; border-radius: 6px;
   background: #ece9e1; vertical-align: middle; user-select: none;
 }
 .sel-pill .sp-type { font-size: 13px; font-weight: 450; line-height: 20px; color: var(--ink); white-space: nowrap; }
