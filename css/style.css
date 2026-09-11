@@ -663,6 +663,8 @@ textarea { font-family: inherit; }
 .doc-sheet[contenteditable="true"]:hover { box-shadow: 0 1px 4px rgba(29,27,22,.14), 0 0 0 1px rgba(13,13,13,.08); }
 .ppt-canvas [contenteditable="true"]:hover { outline: 1px dashed rgba(13,13,13,.25); outline-offset: 2px; }
 .ppt-canvas [contenteditable="true"]:focus { outline: 1.5px solid #f5670f; outline-offset: 2px; }
+/* 演示：文本框整体选中态 */
+.ppt-canvas .box-sel { outline: 1.5px dashed #f5670f; outline-offset: 2px; }
 
 /* --- PPTX：左缩略图栏 + 中画布 + 右浮动面板 + 底状态栏 --- */
 .ppt-app { display: flex; flex-direction: column; height: 100%; background: #f5f5f5; }

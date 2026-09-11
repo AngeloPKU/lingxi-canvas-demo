@@ -525,6 +525,23 @@
         tab.classList.add('active');
         return;
       }
+      // 演示：点击文本框/形状整体 → 出悬浮工具栏（拖选文字仍走文字选区）
+      if (doc.type === 'pptx') {
+        const boxEl = e.target.closest('.ppt-canvas [contenteditable="true"]');
+        if (boxEl) {
+          const s0 = getSelection();
+          if (!s0 || s0.isCollapsed) {
+            clearBoxSel();
+            boxSelEl = boxEl;
+            boxEl.classList.add('box-sel');
+            currentSel = { id: uid(), type: 'pptx', text: boxEl.innerText.trim() || '(空文本框)', doc };
+            showSelToolbar(boxEl.getBoundingClientRect());
+            syncPopPill();
+          }
+        } else {
+          clearBoxSel();
+        }
+      }
       // 表格：点单元格进入编辑（先清掉框选与工具栏）
       const cell = e.target.closest('td .cell');
       if (cell && doc.type === 'xlsx') {
@@ -583,12 +600,13 @@
   }
 
   /* ---------- 选区与悬浮工具栏 ---------- */
-  let currentSel = null;        // { id, type, text, doc, range? }
+  let currentSel = null;        // { id, type, text, doc, range?, sheet? }
   let toolbarHold = false;      // 指针在工具栏内时，忽略选区折叠
   let xlsxDrag = null;          // { anchor, moved }
   let suppressCellClick = false;
   let lastSelRect = null;       // 选区位置，浮层定位用
   let selMarkEl = null;         // 浮层打开期间的选区高亮 mark
+  let boxSelEl = null;          // 演示：整体选中的文本框
 
   function showSelToolbar(rect) {
     const bar = $('#sel-toolbar');
@@ -606,6 +624,11 @@
   function hideSelToolbar() {
     $('#sel-toolbar').hidden = true;
     currentSel = null;
+    clearBoxSel();
+  }
+  function clearBoxSel() {
+    if (boxSelEl) boxSelEl.classList.remove('box-sel');
+    boxSelEl = null;
   }
   function clearXlsxRange() {
     $('#canvas-content').querySelectorAll('td.et-range').forEach((x) => x.classList.remove('et-range'));
@@ -617,6 +640,13 @@
     // AI 编辑浮层打开期间不动选区状态（高亮由 mark 维持）
     if (!$('#sel-popover').hidden) return;
     const s = getSelection();
+    if (!s || !s.rangeCount || s.isCollapsed) {
+      // 演示文本框整体选中态：光标在框内时保留工具栏与框选标记
+      if (boxSelEl && s && s.anchorNode && boxSelEl.contains(s.anchorNode)) return;
+      hideSelToolbar();
+      return;
+    }
+    if (boxSelEl) clearBoxSel();
     const range = s.getRangeAt(0);
     if (!$('#canvas-content').contains(range.commonAncestorContainer)) { hideSelToolbar(); return; }
     const doc = displayedDoc;
@@ -663,7 +693,8 @@
       if (!cells.length) return;
       const text = cells.map((c) => c.innerText.trim()).filter(Boolean).join(' ');
       const range = markXlsxRange(anchor, cells[cells.length - 1]);
-      currentSel = { id: uid(), type: 'xlsx', text: text || '(空区域)', doc: displayedDoc, range };
+      const sheetTab = $('#canvas-content').querySelector('.et-tab.active');
+      currentSel = { id: uid(), type: 'xlsx', text: text || '(空区域)', doc: displayedDoc, range, sheet: sheetTab ? sheetTab.textContent.trim() : '' };
       const f = cells[0].getBoundingClientRect();
       const l = cells[cells.length - 1].getBoundingClientRect();
       showSelToolbar({ left: f.left, top: f.top, width: l.right - f.left, bottom: l.bottom });
@@ -711,7 +742,7 @@
       tip.appendChild(row);
       let body = sel.text;
       if (body.length > 200) body = body.slice(0, 200) + '…';
-      if (sel.range) body = sel.range + '\n' + body;
+      if (sel.range) body = (sel.sheet ? sel.sheet + ' · ' : '') + sel.range + '\n' + body;
       tip.appendChild(el('div', 'pt-body', body));
       tip.hidden = false;
       const r = p.getBoundingClientRect();
@@ -799,7 +830,9 @@
     p._sel = sel;
     p.appendChild(img(TYPE_ICONS[sel.type].name, 16));
     p.appendChild(el('span', 'sp-type', SEL_TYPE_TEXT[sel.type]));
-    const brief = sel.text.slice(0, 12) + (sel.text.length > 12 ? '…' : '');
+    const brief = (sel.type === 'xlsx' && sel.range)
+      ? sel.range
+      : sel.text.slice(0, 12) + (sel.text.length > 12 ? '…' : '');
     p.appendChild(el('span', 'sp-text', brief));
     if (closable) {
       const x = el('button', 'sp-x');
@@ -892,7 +925,7 @@
     unwrapSelMark();
     if (!currentSel || currentSel.type === 'xlsx') return;
     const s = getSelection();
-    if (!s || !s.rangeCount) return;
+    if (!s || !s.rangeCount || s.isCollapsed) return;
     try {
       const mark = document.createElement('mark');
       mark.className = 'sel-mark';
