@@ -218,6 +218,13 @@
 <!-- 选区 pill hover 详情 -->
 <div id="pill-tip" hidden></div>
 
+<!-- [Tooltip: top] 发送按钮操作提示（KDesign Tooltip 规范） -->
+<div class="kd-tooltip-content" id="send-tip" hidden>
+  <div class="tip-row"><span>发送</span><span class="kbd-cap">↵</span></div>
+  <div class="tip-row"><span>添加</span><span class="kbd-cap">Ctrl ↵</span></div>
+  <div class="kd-tooltip-arrow"></div>
+</div>
+
 <!-- [Modal: sm C1] 草稿期切换文件确认 / 无白卡片 / 0 个真组 -->
 <div class="kd-mask" id="switch-mask" hidden>  <div class="kd-modal kd-modal-sm">
     <div class="kd-modal-content">
@@ -239,7 +246,14 @@
     <div class="kd-modal-content">
       <div class="kd-modal-header"><div class="kd-modal-title">DeepSeek API 设置</div></div>
       <div class="kd-modal-body">
-        <label class="kd-field-label" for="key-input">API Key</label>
+        <label class="kd-field-label">选区交互方案</label>
+        <div class="kd-segmented-controller" id="sel-mode-seg">
+          <button class="kd-segmented-item" data-mode="A">方案 A</button>
+          <button class="kd-segmented-item" data-mode="B">方案 B</button>
+          <button class="kd-segmented-item" data-mode="C">方案 C</button>
+        </div>
+        <div class="kd-modal-hint" id="sel-mode-hint"></div>
+        <label class="kd-field-label" for="key-input" style="margin-top:12px;">API Key</label>
         <input class="kd-field-input" id="key-input" type="password" placeholder="sk-…" autocomplete="off" spellcheck="false">
         <div class="kd-modal-hint">Key 仅保存在本浏览器（localStorage），不上传、不进代码仓库。配置后，带选区发送时灵犀会调用 DeepSeek 真实修改右侧文档内容。</div>
       </div>

@@ -470,19 +470,24 @@ textarea { font-family: inherit; }
 .sel-toolbar.inline { flex-direction: row; align-items: center; }
 .sel-toolbar.inline .st-ai { margin-right: 4px; }
 /* AI 编辑入口 */
-.st-ai {
+/* AI 编辑 / 添加到对话：同一套按钮样式 */
+.st-ai, .st-add {
   height: 28px; display: flex; align-items: center; gap: 6px;
   padding: 0 10px 0 6px; border-radius: 6px;
   color: var(--ink); font-size: 13px; font-weight: 450; line-height: 20px;
+  white-space: nowrap;
 }
-.st-ai img { border-radius: 50%; }
-.st-ai:hover { background: rgba(13,13,13,.06); }
+.st-ai img, .st-add img { border-radius: 50%; }
+.st-ai:hover, .st-add:hover { background: rgba(13,13,13,.06); }
 /* 文字形态：AI 编辑沉底整行，与编辑区以分隔线分层 */
 .sel-toolbar.stacked .st-ai {
   width: 100%; margin-top: 4px; padding: 6px 10px 6px 6px;
   border-top: 1px solid rgba(13,13,13,.08); border-radius: 0 0 6px 6px;
 }
 .sel-toolbar.stacked .st-ai:hover { background: rgba(13,13,13,.04); }
+/* 方案 C：工具栏外置「添加到对话」 */
+.sel-toolbar.stacked .st-airow { display: flex; align-items: center; gap: 2px; margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(13,13,13,.08); }
+.sel-toolbar.stacked .st-airow .st-ai { width: auto; flex: 1; margin-top: 0; padding-top: 2px; border-top: none; border-radius: 6px; }
 
 /* ===== 主输入框（contenteditable） ===== */
 .composer-input {
@@ -521,25 +526,26 @@ textarea { font-family: inherit; }
 #pill-tip .pt-name { font-size: 12px; font-weight: 450; color: var(--ink); }
 #pill-tip .pt-body { font-size: 12px; line-height: 18px; color: #555; white-space: pre-wrap; max-height: 160px; overflow: hidden; }
 
-/* ===== AI 编辑浮层 ===== */
+/* ===== AI 编辑浮层（KDesign Popover 容器 + Textarea + Primary/Secondary 按钮） ===== */
 .sel-popover {
   position: fixed; z-index: 1035; width: 320px;
-  padding: 10px; background: #fff;
-  border: 1px solid #e5e5e5; border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(13,13,13,.10);
+  padding: 8px; background: #fff;
+  border: 1px solid rgba(13,13,13,.12); border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(13,13,13,.08);
   display: flex; flex-direction: column; gap: 8px;
 }
 .sel-popover[hidden] { display: none; }
 .sel-popover textarea {
-  border: 1px solid #e5e5e5; border-radius: 6px; padding: 8px;
-  font: inherit; font-size: 13px; line-height: 20px; min-height: 56px; resize: none; outline: none;
+  border: 1px solid rgba(13,13,13,.24); border-radius: 6px; padding: 4px 4px 4px 8px;
+  font: inherit; font-size: 13px; line-height: 22px; min-height: 56px; resize: none; outline: none;
+  transition: border-color .15s;
 }
-.sel-popover textarea:focus { border-color: var(--brand); }
+.sel-popover textarea:focus { border-color: #0a6cff; }
 .sp-foot { display: flex; justify-content: flex-end; gap: 8px; }
-.sp-add { height: 28px; padding: 0 12px; border-radius: 6px; border: 1px solid rgba(13,13,13,.12); font-size: 13px; color: var(--ink); background: #fff; }
+.sp-add { height: 28px; padding: 0 12px; border-radius: 6px; border: 1px solid rgba(13,13,13,.12); font-size: 13px; line-height: 20px; color: #0d0d0d; background: #fff; }
 .sp-add:hover { background: rgba(13,13,13,.04); }
-.sp-send { height: 28px; padding: 0 14px; border-radius: 999px; background: #1f2329; color: #fff; font-size: 13px; }
-.sp-send:hover { background: #000; }
+.sp-send { height: 28px; padding: 0 14px; border-radius: 6px; background: #0a6cff; color: #fff; font-size: 13px; line-height: 20px; }
+.sp-send:hover { background: #3b89ff; }
 
 /* ===== Canvas 编辑中提示条（KDesign Message/Banner warning：底 #FEF1EA / 边 #E2651A / 13px 22px） ===== */
 .canvas-editbar {
@@ -585,6 +591,25 @@ textarea { font-family: inherit; }
 .kd-field-input { width: 100%; height: 32px; border: 1px solid rgba(13,13,13,.15); border-radius: 6px; padding: 0 10px; font: inherit; font-size: 13px; color: #0d0d0d; outline: none; background: #fff; }
 .kd-field-input:focus { border-color: #0a6cff; }
 .kd-modal-hint { font-size: 12px; line-height: 18px; color: #757575; margin-top: 8px; }
+
+/* Segmented 分段控制器（KDesign） */
+.kd-segmented-controller { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid rgba(13,13,13,.12); border-radius: 6px; background: #fff; }
+.kd-segmented-item { height: 26px; padding: 0 12px; border-radius: 4px; font-size: 13px; line-height: 20px; color: #0d0d0d; }
+.kd-segmented-item:hover { background: rgba(13,13,13,.04); }
+.kd-segmented-item.is-active { background: rgba(13,13,13,.1); font-weight: 600; }
+
+/* Tooltip（KDesign：pad 6/12、r6、#E5E5E5 描边、shadow-large、13/20） */
+.kd-tooltip-content {
+  position: fixed; z-index: 1040; max-width: 300px;
+  padding: 6px 12px; background: #fff;
+  border: 1px solid #e5e5e5; border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(13,13,13,.08);
+  font-size: 13px; line-height: 20px; color: #1a1a1a;
+}
+.kd-tooltip-content[hidden] { display: none; }
+.kd-tooltip-arrow { position: absolute; bottom: -5px; left: 50%; margin-left: -4px; width: 8px; height: 8px; background: #fff; border: 1px solid #e5e5e5; border-top: none; border-left: none; transform: rotate(45deg); }
+.tip-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.kbd-cap { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 4px; background: rgba(13,13,13,.06); color: #555; font-size: 11px; line-height: 1; }
 
 /* AI 修改锚点：平时不可见，处理期间淡橙高亮标示“AI 将改这里” */
 .sel-anchor { background: transparent; }

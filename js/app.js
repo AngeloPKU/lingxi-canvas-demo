@@ -607,6 +607,7 @@
   let lastSelRect = null;       // 选区位置，浮层定位用
   let selMarkEl = null;         // 浮层打开期间的选区高亮 mark
   let boxSelEl = null;          // 演示：整体选中的文本框
+  let tipPillEl = null;         // hover 气泡当前绑定的 pill 元素
 
   function showSelToolbar(rect) {
     const bar = $('#sel-toolbar');
@@ -712,6 +713,7 @@
     // 工具栏内按钮：占位提示与 AI 编辑（动态渲染，用委托）
     bar.addEventListener('click', (e) => {
       if (e.target.closest('[data-noop]')) { toast('原型演示：该按钮仅作展示'); return; }
+      if (e.target.closest('.st-add')) { addSelDirect(); return; }
       if (e.target.closest('.st-ai')) {
         if (!currentSel) return;
         openSelPopover(bar.getBoundingClientRect());
@@ -734,6 +736,7 @@
       if (!p) return;
       const sel = selById.get(p.dataset.sel) || p._sel;
       if (!sel) return;
+      tipPillEl = p;
       const tip = $('#pill-tip');
       tip.innerHTML = '';
       const row = el('div', 'pt-row');
@@ -750,7 +753,7 @@
       tip.style.top = Math.max(8, r.top - tip.offsetHeight - 8) + 'px';
     });
     document.addEventListener('mouseout', (e) => {
-      if (e.target.closest && e.target.closest('.sel-pill')) $('#pill-tip').hidden = true;
+      if (e.target.closest && e.target.closest('.sel-pill')) { $('#pill-tip').hidden = true; tipPillEl = null; }
     });
     // 主输入框：pill 删除后同步待发送状态；空内容复位 placeholder
     const comp = $('#chat-input');
@@ -786,6 +789,7 @@
 
   function renderSelToolbar(bar, type) {
     bar.innerHTML = '';
+    const mode = getSelMode();
     const rows = SEL_TOOLBAR_ROWS[type] || [];
     const stacked = type === 'docx';
     bar.className = 'sel-toolbar' + (stacked ? ' stacked' : ' inline');
@@ -793,7 +797,15 @@
     ai.id = 'sel-ai';
     ai.appendChild(img('lingxi_logo_s', 18));
     ai.appendChild(el('span', '', 'AI 编辑'));
-    if (!stacked) bar.appendChild(ai);
+    const addBtn = mode === 'C' ? el('button', 'st-add') : null;
+    if (addBtn) {
+      addBtn.appendChild(img('lingxi_logo_s', 18));
+      addBtn.appendChild(el('span', '', '添加到对话'));
+    }
+    if (!stacked) {
+      bar.appendChild(ai);
+      if (addBtn) bar.appendChild(addBtn);
+    }
     rows.forEach((row) => {
       const r = el('div', 'st-row');
       row.forEach((item) => {
@@ -815,7 +827,13 @@
       });
       bar.appendChild(r);
     });
-    if (stacked) bar.appendChild(ai);
+    if (stacked) {
+      if (addBtn) {
+        const row = el('div', 'st-airow');
+        row.append(ai, addBtn);
+        bar.appendChild(row);
+      } else bar.appendChild(ai);
+    }
   }
 
   /* ---------- 选区 pill / AI 编辑浮层 / 混排发送 ---------- */
@@ -838,7 +856,7 @@
       const x = el('button', 'sp-x');
       x.appendChild(img('symbol_cross_two', 12));
       x.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
-      x.onclick = (e) => { e.stopPropagation(); p.remove(); reconcilePending(); };
+      x.onclick = (e) => { e.stopPropagation(); p.remove(); $('#pill-tip').hidden = true; reconcilePending(); };
       p.appendChild(x);
     }
     // 点 pill：右侧打开/跳转到对应文件
@@ -855,11 +873,15 @@
     [...selById.keys()].forEach((id) => {
       if (!comp.querySelector('.sel-pill[data-sel="' + id + '"]')) selById.delete(id);
     });
+    // 气泡绑定的 pill 已被移除时隐藏气泡（元素删除不会触发 mouseout）
+    if (tipPillEl && !tipPillEl.isConnected) { $('#pill-tip').hidden = true; tipPillEl = null; }
   }
 
   function clearComposer() {
     $('#chat-input').innerHTML = '';
     selById.clear();
+    $('#pill-tip').hidden = true;
+    tipPillEl = null;
   }
 
   function insertSelIntoComposer(sel, instruction) {
@@ -942,6 +964,8 @@
     const pop = $('#sel-popover');
     syncPopPill();
     $('#sel-pop-input').value = '';
+    // 方案 B/C：隐藏「添加到对话」，仅保留发送（Ctrl+Enter 仍可添加）
+    $('#sel-pop-add').style.display = getSelMode() === 'A' ? '' : 'none';
     // 工具栏让位，选区高亮保留
     $('#sel-toolbar').hidden = true;
     wrapSelMark();
@@ -958,8 +982,21 @@
   }
   function closeSelPopover(silent) {
     $('#sel-popover').hidden = true;
+    $('#send-tip').hidden = true;
     unwrapSelMark();
     if (!silent) refreshTextSel();
+  }
+
+  // 方案 C：工具栏一键把选区加入输入框（无批注）
+  function addSelDirect() {
+    if (running) { toast('灵犀正在处理中，暂时不能添加选区'); return; }
+    if (!currentSel) return;
+    const copy = Object.assign({}, currentSel, { id: uid(), instruction: '' });
+    captureSelSnapshot(copy);
+    hideSelToolbar();
+    clearNativeSel();
+    clearXlsxRange();
+    insertSelIntoComposer(copy, '');
   }
   function clearNativeSel() { getSelection().removeAllRanges(); }
 
@@ -1005,6 +1042,14 @@
   // 内部演示用默认 Key（点「填入默认 Key」写入输入框，保存后仅存本浏览器）
   const DEFAULT_KEY = 'sk-5e7798b55dd3411ab418b333a2b0508c';
   const getApiKey = () => localStorage.getItem(KEY_STORE) || '';
+  // 选区交互方案：A 双按钮 / B 仅发送+hover提示 / C = B + 工具栏外置添加
+  const SEL_MODE_STORE = 'lingxi_sel_mode';
+  const getSelMode = () => localStorage.getItem(SEL_MODE_STORE) || 'A';
+  const MODE_DESC = {
+    A: '浮层内提供「添加到对话」与「发送」两个按钮。',
+    B: '浮层仅保留「发送」；Ctrl+Enter 添加到对话；悬停发送按钮查看操作提示。',
+    C: '在方案 B 基础上，悬浮工具栏增加「添加到对话」，一键把选区加入输入框。',
+  };
 
   async function callDeepSeek(system, user) {
     const key = getApiKey();
@@ -1458,8 +1503,33 @@
     // DeepSeek API Key 设置
     $('#btn-settings').onclick = () => {
       $('#key-input').value = getApiKey();
+      syncModeUI();
       $('#key-mask').hidden = false;
     };
+    // 选区交互方案切换（立即生效）
+    const seg = $('#sel-mode-seg');
+    function syncModeUI() {
+      const m = getSelMode();
+      seg.querySelectorAll('.kd-segmented-item').forEach((b) => b.classList.toggle('is-active', b.dataset.mode === m));
+      $('#sel-mode-hint').textContent = MODE_DESC[m];
+    }
+    seg.querySelectorAll('.kd-segmented-item').forEach((b) => {
+      b.onclick = () => {
+        localStorage.setItem(SEL_MODE_STORE, b.dataset.mode);
+        syncModeUI();
+      };
+    });
+    // 方案 B/C：hover 发送按钮出操作提示
+    const sendTip = $('#send-tip');
+    $('#sel-pop-send').addEventListener('mouseenter', () => {
+      if (getSelMode() === 'A') return;
+      sendTip.hidden = false;
+      const r = $('#sel-pop-send').getBoundingClientRect();
+      const w = sendTip.offsetWidth, h = sendTip.offsetHeight;
+      sendTip.style.left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 8)) + 'px';
+      sendTip.style.top = (r.top - h - 10) + 'px';
+    });
+    $('#sel-pop-send').addEventListener('mouseleave', () => { sendTip.hidden = true; });
     $('#key-cancel').onclick = () => { $('#key-mask').hidden = true; };
     $('#key-default').onclick = () => { $('#key-input').value = DEFAULT_KEY; };
     $('#key-save').onclick = () => {
