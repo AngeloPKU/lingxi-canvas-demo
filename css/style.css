@@ -524,7 +524,8 @@ textarea { font-family: inherit; }
 #pill-tip[hidden] { display: none; }
 #pill-tip .pt-row { display: flex; align-items: center; gap: 6px; }
 #pill-tip .pt-name { font-size: 12px; font-weight: 450; color: var(--ink); }
-#pill-tip .pt-body { font-size: 12px; line-height: 18px; color: #555; white-space: pre-wrap; max-height: 160px; overflow: hidden; }
+#pill-tip .pt-path { font-size: 12px; line-height: 18px; color: #757575; word-break: break-all; }
+#pill-tip .pt-loc { font-size: 12px; line-height: 18px; color: #555; }
 
 /* ===== AI 编辑浮层（KDesign Popover 容器 + Textarea + Primary/Secondary 按钮） ===== */
 .sel-popover {

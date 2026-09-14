@@ -163,6 +163,7 @@ function buildDocReply(type, userText) {
   const doc = {
     id: 'doc_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5),
     type, name, topic,
+    path: 'C:/Users/KSO/' + name,
     html: tpl.html(topic),
     sheets: tpl.sheets,      // xlsx sheet 页签（可选）
   };
@@ -524,6 +525,9 @@ const DEMO_SEED = (() => {
   r3.doc.name = '小米YU7与ModelY焕新版核心数据对比.xlsx';
   r3.doc.topic = '小米YU7与ModelY焕新版核心数据对比';
   r3.doc.html = demoXlsxHtml();
+  r1.doc.path = 'C:/Users/KSO/' + r1.doc.name;
+  r2.doc.path = 'C:/Users/KSO/' + r2.doc.name;
+  r3.doc.path = 'C:/Users/KSO/' + r3.doc.name;
   return {
     title: '小米 YU7 与特斯拉 Model Y 焕新版对比调研',
     messages: [

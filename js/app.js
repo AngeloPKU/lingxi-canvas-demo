@@ -374,7 +374,8 @@
     const doc = st.tabs.find((t) => t.id === st.activeId);
     if (!doc) { closeCanvas(); return; }
     $('#canvas-file-icon').src = iconSrc(TYPE_ICONS[doc.type].name);
-    $('#canvas-file-name').textContent = doc.name;
+    $('#canvas-file-name').textContent = doc.path || doc.name;
+    $('#canvas-file-name').title = doc.path || doc.name;
     renderToolbar(doc.type);
     // 切换前先保存上一个文档的编辑，避免丢失；同时清掉选区
     saveCanvasEdits();
@@ -534,7 +535,7 @@
             clearBoxSel();
             boxSelEl = boxEl;
             boxEl.classList.add('box-sel');
-            currentSel = { id: uid(), type: 'pptx', text: boxEl.innerText.trim() || '(空文本框)', doc };
+            currentSel = { id: uid(), type: 'pptx', text: boxEl.innerText.trim() || '(空文本框)', doc, page: doc.cur != null ? doc.cur + 1 : 1 };
             showSelToolbar(boxEl.getBoundingClientRect());
             syncPopPill();
           }
@@ -654,7 +655,7 @@
     if (!doc || doc.type === 'xlsx') { hideSelToolbar(); return; }
     const text = s.toString().trim();
     if (!text) { hideSelToolbar(); return; }
-    currentSel = { id: uid(), type: doc.type, text, doc };
+    currentSel = { id: uid(), type: doc.type, text, doc, page: doc.type === 'pptx' && doc.cur != null ? doc.cur + 1 : null };
     showSelToolbar(range.getBoundingClientRect());
     syncPopPill();
   }
@@ -739,14 +740,16 @@
       tipPillEl = p;
       const tip = $('#pill-tip');
       tip.innerHTML = '';
+      // 1 完整文件名
       const row = el('div', 'pt-row');
       row.appendChild(img(TYPE_ICONS[sel.type].name, 16));
       row.appendChild(el('span', 'pt-name', sel.doc.name));
       tip.appendChild(row);
-      let body = sel.text;
-      if (body.length > 200) body = body.slice(0, 200) + '…';
-      if (sel.range) body = (sel.sheet ? sel.sheet + ' · ' : '') + sel.range + '\n' + body;
-      tip.appendChild(el('div', 'pt-body', body));
+      // 2 文件路径（本地文档）
+      if (sel.doc.path) tip.appendChild(el('div', 'pt-path', sel.doc.path));
+      // 3 位置：演示页码 / 表格 sheet 名
+      if (sel.type === 'pptx' && sel.page) tip.appendChild(el('div', 'pt-loc', '第 ' + sel.page + ' 页'));
+      if (sel.type === 'xlsx' && sel.sheet) tip.appendChild(el('div', 'pt-loc', sel.sheet));
       tip.hidden = false;
       const r = p.getBoundingClientRect();
       tip.style.left = Math.max(8, Math.min(r.left, innerWidth - tip.offsetWidth - 8)) + 'px';
