@@ -967,8 +967,23 @@
     const pop = $('#sel-popover');
     syncPopPill();
     $('#sel-pop-input').value = '';
-    // 方案 B/C：隐藏「添加到对话」，仅保留发送（Ctrl+Enter 仍可添加）
-    $('#sel-pop-add').style.display = getSelMode() === 'A' ? '' : 'none';
+    // 方案 A：多行输入 + 添加/发送双按钮；方案 B/C：单行输入 + 勾 icon 发送并排
+    const mode = getSelMode();
+    const sendBtn = $('#sel-pop-send');
+    if (mode === 'A') {
+      pop.classList.remove('sp-compact');
+      sendBtn.className = 'sp-send sp-send-text';
+      sendBtn.textContent = '发送';
+      $('#sel-pop-foot').appendChild(sendBtn);
+      $('#sel-pop-add').style.display = '';
+    } else {
+      pop.classList.add('sp-compact');
+      sendBtn.className = 'sp-send sp-send-icon';
+      sendBtn.innerHTML = '<img src="assets/icons/symbol_tick.svg" width="16" height="16" alt="">';
+      sendBtn.title = '发送';
+      $('#sel-pop-row').appendChild(sendBtn);
+      $('#sel-pop-add').style.display = 'none';
+    }
     // 工具栏让位，选区高亮保留
     $('#sel-toolbar').hidden = true;
     wrapSelMark();
@@ -990,9 +1005,8 @@
     if (!silent) refreshTextSel();
   }
 
-  // 方案 C：工具栏一键把选区加入输入框（无批注）
+  // 方案 C：工具栏一键把选区加入输入框（无批注）；回复中也可添加，仅发送受限
   function addSelDirect() {
-    if (running) { toast('灵犀正在处理中，暂时不能添加选区'); return; }
     if (!currentSel) return;
     const copy = Object.assign({}, currentSel, { id: uid(), instruction: '' });
     captureSelSnapshot(copy);
@@ -1018,7 +1032,6 @@
     runSelFlow(segs);
   }
   function popAdd() {
-    if (running) { toast('灵犀正在处理中，暂时不能添加选区'); return; }
     if (!currentSel) return;
     const instruction = $('#sel-pop-input').value.trim();
     const copy = Object.assign({}, currentSel, { id: uid(), instruction });

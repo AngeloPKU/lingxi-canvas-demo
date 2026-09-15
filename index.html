@@ -208,10 +208,12 @@
 <!-- AI 编辑浮层：选区标签 + 指令输入 + 发送/添加 -->
 <div class="sel-popover" id="sel-popover" hidden>
   <div class="sp-head" id="sel-pop-pill"></div>
-  <textarea id="sel-pop-input" spellcheck="false" placeholder="告诉灵犀如何处理这个选区"></textarea>
-  <div class="sp-foot">
+  <div class="sp-row" id="sel-pop-row">
+    <textarea id="sel-pop-input" spellcheck="false" placeholder="告诉灵犀如何处理这个选区"></textarea>
+  </div>
+  <div class="sp-foot" id="sel-pop-foot">
     <button class="sp-add" id="sel-pop-add">添加到对话</button>
-    <button class="sp-send" id="sel-pop-send">发送</button>
+    <button class="sp-send sp-send-text" id="sel-pop-send">发送</button>
   </div>
 </div>
 

@@ -536,17 +536,26 @@ textarea { font-family: inherit; }
   display: flex; flex-direction: column; gap: 8px;
 }
 .sel-popover[hidden] { display: none; }
+.sp-row { display: flex; align-items: flex-end; gap: 8px; }
+.sp-row > * { min-width: 0; }
+.sp-row textarea { flex: 1; }
 .sel-popover textarea {
   border: 1px solid rgba(13,13,13,.24); border-radius: 6px; padding: 4px 4px 4px 8px;
   font: inherit; font-size: 13px; line-height: 22px; min-height: 56px; resize: none; outline: none;
   transition: border-color .15s;
 }
 .sel-popover textarea:focus { border-color: #0a6cff; }
+/* 方案 B/C：单行输入（KDesign Input Medium 28px）+ 勾 icon 发送按钮并排 */
+.sel-popover.sp-compact .sp-row { align-items: center; }
+.sel-popover.sp-compact textarea { min-height: 28px; height: 28px; line-height: 20px; overflow: hidden; }
+.sel-popover.sp-compact .sp-foot { display: none; }
 .sp-foot { display: flex; justify-content: flex-end; gap: 8px; }
 .sp-add { height: 28px; padding: 0 12px; border-radius: 6px; border: 1px solid rgba(13,13,13,.12); font-size: 13px; line-height: 20px; color: #0d0d0d; background: #fff; }
 .sp-add:hover { background: rgba(13,13,13,.04); }
 .sp-send { height: 28px; padding: 0 14px; border-radius: 6px; background: #0a6cff; color: #fff; font-size: 13px; line-height: 20px; }
 .sp-send:hover { background: #3b89ff; }
+.sp-send-icon { width: 28px; flex: 0 0 28px; padding: 0; display: flex; align-items: center; justify-content: center; }
+.sp-send-icon img { filter: brightness(0) invert(1); }
 
 /* ===== Canvas 编辑中提示条（KDesign Message/Banner warning：底 #FEF1EA / 边 #E2651A / 13px 22px） ===== */
 .canvas-editbar {
